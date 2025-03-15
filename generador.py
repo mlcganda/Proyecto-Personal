@@ -3,12 +3,21 @@ import os
 
 df = pd.read_csv('data/Compuestos.csv')
 
-def generar_pagina(formula):
-    resultados = df[df['Formula'] == formula]
-    if not resultados.empty:
-        html_resultados = resultados.to_html()
-        with open(f'{formula}.html', 'w') as f:
-            f.write(f"""
+def buscar_formula(formula,dfdatos):
+  """
+  Busca una fórmula específica en la columna 'Fórmula' del DataFrame df.
+
+  Args:
+    formula: La fórmula a buscar.
+
+  Returns:
+    Un DataFrame con las filas que contienen la fórmula especificada, o None si no se encuentra.
+  """
+  resultados = dfdatos[dfdatos['Formula'] == formula]
+  if not resultados.empty:
+      return resultados
+  else:
+      return None
 <!DOCTYPE html>
 <html>
 <head>
