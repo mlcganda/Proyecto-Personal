@@ -18,6 +18,8 @@ def buscar_formula(formula,dfdatos):
       return resultados
   else:
       return None
+
+
 <!DOCTYPE html>
 <html>
 <head>
