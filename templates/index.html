@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Buscador de Formulaciones</title>
+</head>
+<body>
+    <h1>Buscador de Formulaciones</h1>
+    <input type="text" id="formulaInput" placeholder="Fórmula">
+    <button onclick="buscarFormula()">Buscar</button>
+    <div id="resultados"></div>
+    <script>
+        function buscarFormula() {
+            const formula = document.getElementById('formulaInput').value;
+            fetch('/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `formula=${formula}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                const resultadosDiv = document.getElementById('resultados');
+                resultadosDiv.innerHTML = '';
+                if (Array.isArray(data)) {
+                    data.forEach(item => {
+                        resultadosDiv.innerHTML += `<p>${JSON.stringify(item)}</p>`;
+                    });
+                } else {
+                    resultadosDiv.innerHTML = `<p>${JSON.stringify(data)}</p>`;
+                }
+            });
+        }
+    </script>
+</body>
+</html>
